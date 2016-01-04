@@ -3,8 +3,8 @@
 @section('content')
 <div class="container spark-screen">
     <div class="page-header">
-        <h1>Administrar usuarios</h1>
-        <a href="#" class="btn btn-primary">Crear nuevo usuario</a>
+        <h1>Crear nuevo usuario</h1>
+        <a href="/admin/usuarios" class="btn btn-default">Volver a la lista de usuarios</a>
     </div>
 
     @if (count($errors) > 0)
