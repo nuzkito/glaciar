@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Administrar usuarios</h1>
-        <a href="#" class="btn btn-primary">Crear nuevo usuario</a>
+        <a href="/admin/usuarios/nuevo" class="btn btn-primary">Crear nuevo usuario</a>
     </div>
 
     <div class="row">

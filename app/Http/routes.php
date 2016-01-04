@@ -35,5 +35,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/admin/usuarios', 'Admin\UsersController@index');
+        Route::get('/admin/usuarios/nuevo', 'Admin\UsersController@create');
+        Route::post('/admin/usuarios', 'Admin\UsersController@store');
     });
 });
