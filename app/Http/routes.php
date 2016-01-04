@@ -32,4 +32,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index')->middleware('guest');
     Route::get('/cursos', 'CoursesController@index')->middleware('auth');
+
+    Route::group(['middleware' => ['auth', 'admin']], function () {
+        Route::get('/admin/usuarios', 'Admin\UsersController@index');
+    });
 });

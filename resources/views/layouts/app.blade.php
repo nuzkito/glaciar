@@ -58,6 +58,9 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     @else
+                        @can('admin')
+                            <li><a href="/admin/usuarios">Administrar Usuarios</a></li>
+                        @endcan
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -66,6 +69,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
+                        </li>
                     @endif
                 </ul>
             </div>
