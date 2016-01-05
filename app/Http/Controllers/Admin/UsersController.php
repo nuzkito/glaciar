@@ -35,6 +35,33 @@ class UsersController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return redirect('/admin/usuarios');
+        session()->flash('success', 'El usuario se ha creado.');
+        return redirect('/admin/usuarios/' . $user->id . '/edit');
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => '',
+            'role' => 'in:student,professor,admin',
+        ]);
+
+        $user = User::find($id);
+        $user->fill($request->only(['name', 'email', 'role']));
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+
+        session()->flash('success', 'Los datos del usuario se han actualizado.');
+        return redirect()->back();
     }
 }

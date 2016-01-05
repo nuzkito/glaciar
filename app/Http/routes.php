@@ -37,5 +37,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/admin/usuarios', 'Admin\UsersController@index');
         Route::get('/admin/usuarios/nuevo', 'Admin\UsersController@create');
         Route::post('/admin/usuarios', 'Admin\UsersController@store');
+        Route::get('/admin/usuarios/{id}/edit', 'Admin\UsersController@edit');
+        Route::put('/admin/usuarios/{id}', 'Admin\UsersController@update');
     });
 });

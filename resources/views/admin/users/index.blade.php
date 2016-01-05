@@ -26,7 +26,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary">Editar</a>
+                            <a href="/admin/usuarios/{{ $user->id }}/edit" class="btn btn-primary">Editar</a>
                             <a href="#" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
