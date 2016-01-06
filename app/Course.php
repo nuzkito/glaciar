@@ -14,4 +14,10 @@ class Course extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id')
+            ->withTimestamps();
+    }
 }
