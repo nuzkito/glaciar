@@ -50,7 +50,11 @@
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
+                    @if (Auth::guest())
+                        <li><a href="/">Home</a></li>
+                    @else
+                        <li><a href="/cursos">Cursos</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
