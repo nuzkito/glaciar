@@ -61,6 +61,7 @@
                         <li><a href="/register">Register</a></li>
                     @else
                         @can('admin')
+                            <li><a href="/admin/cursos">Administrar Cursos</a></li>
                             <li><a href="/admin/usuarios">Administrar Usuarios</a></li>
                         @endcan
                         <li class="dropdown">

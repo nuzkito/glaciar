@@ -40,5 +40,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/admin/usuarios/{id}/edit', 'Admin\UsersController@edit');
         Route::put('/admin/usuarios/{id}', 'Admin\UsersController@update');
         Route::delete('/admin/usuarios/{id}', 'Admin\UsersController@destroy');
+
+        Route::get('/admin/cursos', 'Admin\CoursesController@index');
+        Route::get('/admin/cursos/nuevo', 'Admin\CoursesController@create');
+        Route::post('/admin/cursos', 'Admin\CoursesController@store');
+        Route::get('/admin/cursos/{id}/edit', 'Admin\CoursesController@edit');
+        Route::put('/admin/cursos/{id}', 'Admin\CoursesController@update');
+        Route::delete('/admin/cursos/{id}', 'Admin\CoursesController@destroy');
     });
 });
