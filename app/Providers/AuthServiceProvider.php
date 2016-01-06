@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('admin', function ($user) {
             return $user->role === 'admin';
         });
+
+        $gate->define('view-course', function ($user, $course) {
+            return $user->courses->contains($course);
+        });
     }
 }

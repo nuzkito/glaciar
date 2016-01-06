@@ -26,3 +26,10 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
         'name' => $faker->sentence,
     ];
 });
+
+$factory->define(App\Content::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'body' => $faker->paragraphs(mt_rand(1, 5), true),
+    ];
+});

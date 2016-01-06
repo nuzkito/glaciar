@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder
         'users',
         'courses',
         'course_user',
+        'contents',
     ];
 
     /**

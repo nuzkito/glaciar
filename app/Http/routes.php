@@ -31,7 +31,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', 'HomeController@index')->middleware('guest');
-    Route::get('/cursos', 'CoursesController@index')->middleware('auth');
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/cursos', 'CoursesController@index');
+        Route::get('/cursos/{id}', 'CoursesController@show');
+        Route::get('/cursos/{id}/questions', 'CoursesController@questions');
+        Route::get('/contenidos/{id}', 'ContentsController@show');
+    });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/admin/usuarios', 'Admin\UsersController@index');

@@ -12,6 +12,11 @@ class CoursesTableSeeder extends Seeder
     public function run()
     {
         $courses = factory(App\Course::class, 5)->create();
+        $courses->each(function ($course) {
+            $course->contents()
+                ->saveMany(factory(App\Content::class, mt_rand(1, 10))->make());
+        });
+
         $users = App\User::all();
         foreach ($users as $user) {
             foreach ($courses as $course) {
