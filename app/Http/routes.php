@@ -39,5 +39,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/admin/usuarios', 'Admin\UsersController@store');
         Route::get('/admin/usuarios/{id}/edit', 'Admin\UsersController@edit');
         Route::put('/admin/usuarios/{id}', 'Admin\UsersController@update');
+        Route::delete('/admin/usuarios/{id}', 'Admin\UsersController@destroy');
     });
 });

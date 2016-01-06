@@ -7,6 +7,12 @@
         <a href="/admin/usuarios/nuevo" class="btn btn-primary">Crear nuevo usuario</a>
     </div>
 
+    @if (Session::has('success'))
+        <p class="alert alert-success alert-dismissible">
+            <strong>{{ Session::get('success') }}</strong>
+        </p>
+    @endif
+
     <div class="row">
         <table class="table">
             <thead>
@@ -27,7 +33,11 @@
                         <td>{{ $user->role }}</td>
                         <td>
                             <a href="/admin/usuarios/{{ $user->id }}/edit" class="btn btn-primary">Editar</a>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
+                            <form class="form-button" action="/admin/usuarios/{{ $user->id }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

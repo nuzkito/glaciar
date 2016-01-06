@@ -64,4 +64,13 @@ class UsersController extends Controller
         session()->flash('success', 'Los datos del usuario se han actualizado.');
         return redirect()->back();
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        session()->flash('success', 'El usuario ' . $user->name . ' se ha eliminado.');
+        return redirect('/admin/usuarios');
+    }
 }
