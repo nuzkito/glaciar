@@ -26,15 +26,4 @@ class CoursesController extends Controller
 
         return view('courses.show', compact('course'));
     }
-
-    public function questions($id)
-    {
-        $course = Course::findOrFail($id);
-
-        if (auth()->user()->cannot('view-course', $course)) {
-            abort(403);
-        }
-
-        return view('courses.questions', compact('course'));
-    }
 }

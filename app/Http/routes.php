@@ -35,8 +35,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/cursos', 'CoursesController@index');
         Route::get('/cursos/{id}', 'CoursesController@show');
-        Route::get('/cursos/{id}/questions', 'CoursesController@questions');
         Route::get('/contenidos/{id}', 'ContentsController@show');
+        Route::get('/cursos/{id}/preguntas', 'QuestionsController@index');
+        Route::get('/preguntas/{id}', 'QuestionsController@show');
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {
