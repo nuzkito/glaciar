@@ -40,6 +40,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/preguntas/{id}', 'QuestionsController@show');
         Route::post('/preguntas', 'QuestionsController@store');
         Route::post('/respuestas', 'AnswersController@store');
+        Route::get('/cursos/{id}/crear-contenido', 'ContentsController@create');
+        Route::post('/contenidos', 'ContentsController@store');
+        Route::get('/contenidos/{id}/editar', 'ContentsController@edit');
+        Route::put('/contenidos/{id}', 'ContentsController@update');
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {

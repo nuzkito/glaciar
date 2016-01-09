@@ -21,7 +21,7 @@ class Content extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function getBodyAttribute()
+    public function getParsedBodyAttribute()
     {
         return Parsedown::instance()->text($this->attributes['body']);
     }
