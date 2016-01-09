@@ -39,6 +39,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/cursos/{id}/preguntas', 'QuestionsController@index');
         Route::get('/preguntas/{id}', 'QuestionsController@show');
         Route::post('/preguntas', 'QuestionsController@store');
+        Route::post('/respuestas', 'AnswersController@store');
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {

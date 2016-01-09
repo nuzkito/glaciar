@@ -21,6 +21,43 @@
     </div>
 
     <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+        <hr />
+        <h3>Publicar una respuesta</h3>
+
+        <form action="/respuestas" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="question_id" value="{{ $question->id }}">
+            <div class="form-group">
+                <label for="title">Respuesta</label>
+                <textarea class="form-control" id="body" name="body" placeholder="Responde a la pregunta">{{ old('body') }}</textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Responder</button>
+            </div>
+        </form>
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p><strong>No se ha podido enviar la respuesta</strong> por los siguientes motivos:</p>
+
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (Session::has('success'))
+            <p class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>{{ Session::get('success') }}</strong>
+            </p>
+        @endif
+    </div>
+
+    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
         @foreach ($question->answers as $answer)
             <div class="panel panel-default">
                 <div class="panel-heading">

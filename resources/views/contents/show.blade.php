@@ -9,7 +9,7 @@
 
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">Contenido</a></li>
-        <li role="presentation"><a href="/cursos/{{ $content->course->id }}/questions">Preguntas</a></li>
+        <li role="presentation"><a href="/cursos/{{ $content->course->id }}/preguntas">Preguntas</a></li>
     </ul>
 
     <div class="page-header col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
