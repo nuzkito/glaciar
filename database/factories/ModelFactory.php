@@ -33,3 +33,16 @@ $factory->define(App\Content::class, function (Faker\Generator $faker) {
         'body' => $faker->paragraphs(mt_rand(1, 5), true),
     ];
 });
+
+$factory->define(App\Question::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'body' => $faker->paragraphs(mt_rand(1, 3), true),
+    ];
+});
+
+$factory->define(App\Answer::class, function (Faker\Generator $faker) {
+    return [
+        'body' => $faker->paragraphs(mt_rand(1, 3), true),
+    ];
+});
