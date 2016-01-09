@@ -12,7 +12,40 @@
         <li role="presentation" class="active"><a href="#">Preguntas</a></li>
     </ul>
 
-    @foreach ($course->questions as $question)
+    <form action="/preguntas" method="POST">
+        {!! csrf_field() !!}
+        <input type="hidden" name="course_id" value="{{ $course->id }}">
+        <div class="form-group">
+            <label for="title">Nueva pregunta</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="¿Cuál es tu pregunta?" value="{{ old('title') }}">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="body" name="body" placeholder="Amplía tu pregunta si lo necesitas">{{ old('body') }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Preguntar</button>
+    </form>
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p><strong>No se ha podido enviar la pregunta</strong> por los siguientes motivos:</p>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (Session::has('success'))
+        <p class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ Session::get('success') }}</strong>
+        </p>
+    @endif
+
+    @foreach ($questions as $question)
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><a href="/preguntas/{{ $question->id }}">{{ $question->title }}</a></h3>
