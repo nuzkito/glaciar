@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\User;
 
 class CoursesController extends Controller
 {
@@ -18,7 +19,8 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        $users = User::all();
+        return view('admin.courses.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -29,6 +31,7 @@ class CoursesController extends Controller
 
         $course = new Course($request->only(['name']));
         $course->save();
+        $course->users()->sync($request->input('users'));
 
         session()->flash('success', 'El curso se ha creado.');
         return redirect('/admin/cursos/' . $course->id . '/edit');
@@ -37,7 +40,8 @@ class CoursesController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        return view('admin.courses.edit', compact('course'));
+        $users = User::all();
+        return view('admin.courses.edit', compact('course', 'users'));
     }
 
     public function update(Request $request, $id)
@@ -46,7 +50,10 @@ class CoursesController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        Course::findOrFail($id)->fill($request->only(['name']))->save();
+        $course = Course::findOrFail($id);
+        $course->fill($request->only(['name']));
+        $course->save();
+        $course->users()->sync($request->input('users'));
 
         session()->flash('success', 'Los datos del curso se han actualizado.');
         return redirect()->back();

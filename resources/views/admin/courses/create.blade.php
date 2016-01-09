@@ -32,6 +32,17 @@
         </div>
 
         <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Usuarios con acceso al curso</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="users[]" multiple size="15">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">Crear curso</button>
             </div>
