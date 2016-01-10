@@ -26,7 +26,7 @@ class ContentsController extends Controller
     {
         $course = Course::findOrFail($course_id);
 
-        if (auth()->user()->cannot('manage-course-contents', $content)) {
+        if (auth()->user()->cannot('manage-course-contents', $course)) {
             abort(403);
         }
 
@@ -37,7 +37,7 @@ class ContentsController extends Controller
     {
         $course = Course::findOrFail($request->input('course_id'));
 
-        if (auth()->user()->cannot('manage-course-contents', $content)) {
+        if (auth()->user()->cannot('manage-course-contents', $course)) {
             abort(403);
         }
 
@@ -58,7 +58,7 @@ class ContentsController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if (auth()->user()->cannot('manage-course-contents', $content)) {
+        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
             abort(403);
         }
 
@@ -69,7 +69,7 @@ class ContentsController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if (auth()->user()->cannot('manage-course-contents', $content)) {
+        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
             abort(403);
         }
 
