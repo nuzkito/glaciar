@@ -55,4 +55,34 @@ class QuestionsController extends Controller
         session()->flash('success', 'La pregunta ha sido enviada');
         return redirect()->back();
     }
+
+    public function edit($id)
+    {
+        $question = Question::findOrFail($id);
+
+        if (auth()->user()->cannot('edit-question', $question)) {
+            return abort(403);
+        }
+
+        return view('questions.edit', compact('question'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $question = Question::findOrFail($id);
+
+        if (auth()->user()->cannot('edit-question', $question)) {
+            return abort(403);
+        }
+
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => '',
+        ]);
+
+        $question->fill($request->only(['title', 'body']))->save();
+
+        session()->flash('success', 'La pregunta ha sido editada.');
+        return redirect()->back();
+    }
 }

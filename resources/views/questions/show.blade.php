@@ -13,7 +13,10 @@
     </ul>
 
     <div class="page-header col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-      <h1>{{ $question->title }}</h1>
+        <h1>{{ $question->title }}</h1>
+        @can('edit-question', $question)
+            <a href="/preguntas/{{ $question->id }}/editar" class="btn btn-default">Editar pregunta</a>
+        @endcan
     </div>
 
     <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">

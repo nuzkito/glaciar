@@ -27,7 +27,7 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
-    
+
     Route::auth();
 
     Route::get('/', 'HomeController@index')->middleware('guest');
@@ -39,6 +39,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/cursos/{id}/preguntas', 'QuestionsController@index');
         Route::get('/preguntas/{id}', 'QuestionsController@show');
         Route::post('/preguntas', 'QuestionsController@store');
+        Route::get('/preguntas/{id}/editar', 'QuestionsController@edit');
+        Route::put('/preguntas/{id}', 'QuestionsController@update');
         Route::post('/respuestas', 'AnswersController@store');
         Route::get('/cursos/{id}/crear-contenido', 'ContentsController@create');
         Route::post('/contenidos', 'ContentsController@store');

@@ -40,5 +40,9 @@ class AuthServiceProvider extends ServiceProvider
                 && $user->courses->contains($course)
             );
         });
+
+        $gate->define('edit-question', function ($user, $question) {
+            return $user->id === $question->user_id;
+        });
     }
 }
