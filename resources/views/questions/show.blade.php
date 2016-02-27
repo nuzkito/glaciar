@@ -67,10 +67,26 @@
                     {{ $answer->user->name }}
                 </div>
                 <div class="panel-body">
-                    {{ $answer->body }}
+                    @if (isset($answerToEdit) && $answerToEdit->id === $answer->id)
+                        <form action="/respuestas/{{ $answerToEdit->id }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="title">Respuesta</label>
+                                <textarea class="form-control" id="body" name="body" placeholder="Responde a la pregunta">{{ old('body', $answerToEdit->body) }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary">Editar respuesta</button>
+                            </div>
+                        </form>
+                    @else
+                        {{ $answer->body }}
+                    @endif
                 </div>
                 <div class="panel-footer">
                     {{ $answer->created_at }}
+                    @can('edit-answer', $answer)
+                        <a href="/respuestas/{{ $answer->id }}/editar">Editar</a>
+                    @endcan
                 </div>
             </div>
         @endforeach

@@ -42,6 +42,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/preguntas/{id}/editar', 'QuestionsController@edit');
         Route::put('/preguntas/{id}', 'QuestionsController@update');
         Route::post('/respuestas', 'AnswersController@store');
+        Route::get('/respuestas/{id}/editar', 'AnswersController@edit');
+        Route::post('/respuestas/{id}', 'AnswersController@update');
         Route::get('/cursos/{id}/crear-contenido', 'ContentsController@create');
         Route::post('/contenidos', 'ContentsController@store');
         Route::get('/contenidos/{id}/editar', 'ContentsController@edit');

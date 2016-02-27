@@ -31,4 +31,37 @@ class AnswersController extends Controller
         session()->flash('success', 'La respuesta ha sido enviada.');
         return redirect()->back();
     }
+
+    public function edit(Request $request, int $id)
+    {
+        $answer = Answer::findOrFail($id);
+
+        if (auth()->user()->cannot('edit-answer', $answer)) {
+            abort(403);
+        }
+
+        return view('questions.show', [
+            'question' => $answer->question,
+            'answerToEdit' => $answer,
+        ]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $answer = Answer::findOrFail($id);
+
+        if (auth()->user()->cannot('edit-answer', $answer)) {
+            abort(403);
+        }
+
+        $this->validate($request, [
+            'body' => 'required',
+        ]);
+
+        $answer->body = $request->get('body');
+        $answer->save();
+
+        session()->flash('success', 'La respuesta ha sido editada.');
+        return redirect('/preguntas/' . $answer->question->id);
+    }
 }
