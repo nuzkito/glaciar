@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-        {!! $content->parsedBody !!}
+        {!! markdownToHtml($content->body) !!}
     </div>
 </div>
 @endsection
