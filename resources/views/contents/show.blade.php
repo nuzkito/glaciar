@@ -5,6 +5,7 @@
     <div class="page-header">
         <h1>{{ $content->course->name }}</h1>
         <a href="/cursos/{{ $content->course->id }}" class="btn btn-default">Volver a los contenidos</a>
+        <a href="/contenidos/{{ $content->id }}/editar" class="btn btn-default">Editar</a>
         <form class="form-button" action="/contenidos/{{ $content->id }}" method="post">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
