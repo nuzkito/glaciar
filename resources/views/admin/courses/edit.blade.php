@@ -7,18 +7,7 @@
         <a href="/admin/cursos" class="btn btn-default">Volver a la lista de cursos</a>
     </div>
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p><strong>No se ha podido editar el curso</strong> por los siguientes motivos:</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('partials.errors', ['text' => 'editar el curso'])
 
     @if (Session::has('success'))
         <p class="alert alert-success alert-dismissible">

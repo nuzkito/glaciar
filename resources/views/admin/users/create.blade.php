@@ -7,19 +7,7 @@
         <a href="/admin/usuarios" class="btn btn-default">Volver a la lista de usuarios</a>
     </div>
 
-    @if (count($errors) > 0)
-        <!-- Form Error List -->
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p><strong>No se ha podido crear el usuario</strong> por los siguientes motivos:</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('partials.errors', ['text' => 'crear el usuario'])
 
     <form action="/admin/usuarios" method="POST" class="form-horizontal">
         {{ csrf_field() }}
