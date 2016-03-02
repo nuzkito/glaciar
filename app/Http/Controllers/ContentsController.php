@@ -84,4 +84,18 @@ class ContentsController extends Controller
         session()->flash('success', 'El contenido se ha editado.');
         return redirect()->back();
     }
+
+    public function destroy($id)
+    {
+        $content = Content::findOrFail($id);
+
+        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
+            abort(403);
+        }
+
+        $content->delete();
+
+        session()->flash('success', 'El contenido se ha editado.');
+        return redirect('/cursos/' . $content->course->id);
+    }
 }

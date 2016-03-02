@@ -5,6 +5,11 @@
     <div class="page-header">
         <h1>{{ $content->course->name }}</h1>
         <a href="/cursos/{{ $content->course->id }}" class="btn btn-default">Volver a los contenidos</a>
+        <form class="form-button" action="/contenidos/{{ $content->id }}" method="post">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
     </div>
 
     <ul class="nav nav-tabs">

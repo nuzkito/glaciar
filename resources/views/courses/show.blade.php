@@ -21,6 +21,11 @@
                 <a href="/contenidos/{{ $content->id }}">{{ $content->title }}</a>
                 @can('manage-course-contents', $course)
                     <a href="/contenidos/{{ $content->id }}/editar" class="btn btn-default btn-xs">Editar</a>
+                    <form class="form-button" action="/contenidos/{{ $content->id }}" method="post">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
+                    </form>
                 @endcan
             </li>
         @endforeach

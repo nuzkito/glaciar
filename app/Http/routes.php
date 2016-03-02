@@ -48,6 +48,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/contenidos', 'ContentsController@store');
         Route::get('/contenidos/{id}/editar', 'ContentsController@edit');
         Route::put('/contenidos/{id}', 'ContentsController@update');
+        Route::delete('/contenidos/{id}', 'ContentsController@destroy');
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {
