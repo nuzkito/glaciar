@@ -15,14 +15,16 @@
     <form action="/preguntas" method="POST">
         {!! csrf_field() !!}
         <input type="hidden" name="course_id" value="{{ $course->id }}">
+        <h2>Nueva pregunta</h2>
         <div class="form-group">
-            <label for="title">Nueva pregunta</label>
             <input type="text" class="form-control" id="title" name="title" placeholder="¿Cuál es tu pregunta?" value="{{ old('title') }}">
         </div>
         <div class="form-group">
             <textarea class="form-control" id="body" name="body" placeholder="Amplía tu pregunta si lo necesitas">{{ old('body') }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Preguntar</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Preguntar</button>
+        </div>
     </form>
 
     @if (count($errors) > 0)
