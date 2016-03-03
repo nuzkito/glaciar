@@ -51,7 +51,7 @@ class ContentsController extends Controller
         $content->save();
 
         session()->flash('success', 'El contenido se ha publicado.');
-        return redirect('/contenidos/' . $content->id . '/editar');
+        return redirect()->route('content.edit', $content->id);
     }
 
     public function edit($id)
@@ -96,6 +96,6 @@ class ContentsController extends Controller
         $content->delete();
 
         session()->flash('success', 'El contenido se ha editado.');
-        return redirect('/cursos/' . $content->course->id);
+        return redirect()->route('course.show', $content->course->id);
     }
 }

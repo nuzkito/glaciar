@@ -4,15 +4,15 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>{{ $course->name }}</h1>
-        <a href="/cursos" class="btn btn-default">Volver a la lista de cursos</a>
+        <a href="{{ route('course.index') }}" class="btn btn-default">Volver a la lista de cursos</a>
     </div>
 
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="/cursos/{{ $course->id }}">Contenido</a></li>
-        <li role="presentation" class="active"><a href="#">Preguntas</a></li>
+        <li role="presentation"><a href="{{ route('course.show', $course->id) }}">Contenido</a></li>
+        <li role="presentation" class="active"><a href="{{ route('question.index', $course->id) }}">Preguntas</a></li>
     </ul>
 
-    <form action="/preguntas" method="POST">
+    <form action="{{ route('question.store') }}" method="POST">
         {!! csrf_field() !!}
         <input type="hidden" name="course_id" value="{{ $course->id }}">
         <h2>Nueva pregunta</h2>
@@ -39,7 +39,7 @@
     @foreach ($questions as $question)
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><a href="/preguntas/{{ $question->id }}">{{ $question->title }}</a></h3>
+                <h3 class="panel-title"><a href="{{ route('question.show', $question->id) }}">{{ $question->title }}</a></h3>
             </div>
             <div class="panel-body">
                 {{ $question->body }}

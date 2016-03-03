@@ -62,6 +62,6 @@ class AnswersController extends Controller
         $answer->save();
 
         session()->flash('success', 'La respuesta ha sido editada.');
-        return redirect('/preguntas/' . $answer->question->id);
+        return redirect()->route('question.show', $answer->question->id);
     }
 }

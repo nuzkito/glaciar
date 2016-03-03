@@ -4,12 +4,12 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Crear nuevo curso</h1>
-        <a href="/admin/cursos" class="btn btn-default">Volver a la lista de cursos</a>
+        <a href="{{ route('admin.course.index') }}" class="btn btn-default">Volver a la lista de cursos</a>
     </div>
 
     @include('partials.errors', ['text' => 'crear el curso'])
 
-    <form action="/admin/cursos" method="POST" class="form-horizontal">
+    <form action="{{ route('admin.course.store') }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <div class="form-group">

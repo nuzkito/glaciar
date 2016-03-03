@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Editar usuario</h1>
-        <a href="/admin/usuarios" class="btn btn-default">Volver a la lista de usuarios</a>
+        <a href="{{ route('admin.user.index') }}" class="btn btn-default">Volver a la lista de usuarios</a>
     </div>
 
     @include('partials.errors', ['text' => 'editar el usuario'])
@@ -16,7 +16,7 @@
         </p>
     @endif
 
-    <form action="/admin/usuarios/{{ $user->id }}/" method="POST" class="form-horizontal">
+    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 

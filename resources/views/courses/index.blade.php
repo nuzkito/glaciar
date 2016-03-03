@@ -8,7 +8,7 @@
 
     <div class="list-group">
         @foreach ($courses as $course)
-            <a href="/cursos/{{ $course->id }}" class="list-group-item">{{ $course->name }}</a>
+            <a href="{{ route('course.show', $course->id) }}" class="list-group-item">{{ $course->name }}</a>
         @endforeach
     </div>
 </div>

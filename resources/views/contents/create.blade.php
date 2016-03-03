@@ -4,18 +4,18 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>{{ $course->name }}</h1>
-        <a href="/cursos/{{ $course->id }}" class="btn btn-default">Volver a los contenidos</a>
+        <a href="{{ route('course.index', $course->id) }}" class="btn btn-default">Volver a los contenidos</a>
     </div>
 
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">Contenido</a></li>
-        <li role="presentation"><a href="/cursos/{{ $course->id }}/preguntas">Preguntas</a></li>
+        <li role="presentation"><a href="{{ route('question.index', $course->id) }}">Preguntas</a></li>
     </ul>
 
     <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
         <h2>Crear nuevo contenido</h2>
 
-        <form action="/contenidos" method="POST">
+        <form action="{{ route('content.store') }}" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="course_id" value="{{ $course->id }}">
             <div class="form-group">

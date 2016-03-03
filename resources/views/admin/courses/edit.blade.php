@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Editar curso</h1>
-        <a href="/admin/cursos" class="btn btn-default">Volver a la lista de cursos</a>
+        <a href="{{ route('admin.course.index') }}" class="btn btn-default">Volver a la lista de cursos</a>
     </div>
 
     @include('partials.errors', ['text' => 'editar el curso'])
@@ -16,7 +16,7 @@
         </p>
     @endif
 
-    <form action="/admin/cursos/{{ $course->id }}/" method="POST" class="form-horizontal">
+    <form action="{{ route('admin.course.update', $course->id) }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 

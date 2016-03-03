@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Administrar cursos</h1>
-        <a href="/admin/cursos/nuevo" class="btn btn-primary">Crear nuevo curso</a>
+        <a href="{{ route('admin.course.create') }}" class="btn btn-primary">Crear nuevo curso</a>
     </div>
 
     @if (Session::has('success'))
@@ -29,8 +29,8 @@
                         <td>{{ $course->id }}</td>
                         <td>{{ $course->name }}</td>
                         <td>
-                            <a href="/admin/cursos/{{ $course->id }}/edit" class="btn btn-primary">Editar</a>
-                            <form class="form-button" action="/admin/cursos/{{ $course->id }}" method="POST">
+                            <a href="{{ route('admin.course.edit', $course->id) }}" class="btn btn-primary">Editar</a>
+                            <form class="form-button" action="{{ route('admin.course.destroy', $course->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger">Eliminar</button>

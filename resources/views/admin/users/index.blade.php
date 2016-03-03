@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Administrar usuarios</h1>
-        <a href="/admin/usuarios/nuevo" class="btn btn-primary">Crear nuevo usuario</a>
+        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Crear nuevo usuario</a>
     </div>
 
     @if (Session::has('success'))
@@ -33,8 +33,8 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
                         <td>
-                            <a href="/admin/usuarios/{{ $user->id }}/edit" class="btn btn-primary">Editar</a>
-                            <form class="form-button" action="/admin/usuarios/{{ $user->id }}" method="POST">
+                            <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                            <form class="form-button" action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -45,7 +45,7 @@
             </tbody>
         </table>
     </div>
-        
+
     <div class="row text-center">
         {!! $users->links() !!}
     </div>

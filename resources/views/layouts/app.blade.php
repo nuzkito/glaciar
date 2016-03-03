@@ -15,7 +15,7 @@
 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link href="/styles.css" rel="stylesheet">
 
     <style>
@@ -42,7 +42,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="{{ route('index') }}">
                     Laravel
                 </a>
             </div>
@@ -51,9 +51,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::guest())
-                        <li><a href="/">Home</a></li>
+                        <li><a href="{{ route('index') }}">Home</a></li>
                     @else
-                        <li><a href="/cursos">Cursos</a></li>
+                        <li><a href="{{ route('course.index') }}">Cursos</a></li>
                     @endif
                 </ul>
 
@@ -65,8 +65,8 @@
                         <li><a href="/register">Register</a></li>
                     @else
                         @can('admin')
-                            <li><a href="/admin/cursos">Administrar Cursos</a></li>
-                            <li><a href="/admin/usuarios">Administrar Usuarios</a></li>
+                            <li><a href="{{ route('admin.course.index') }}">Administrar Cursos</a></li>
+                            <li><a href="{{ route('admin.user.index') }}">Administrar Usuarios</a></li>
                         @endcan
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

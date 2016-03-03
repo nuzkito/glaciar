@@ -34,7 +34,7 @@ class CoursesController extends Controller
         $course->users()->sync($request->input('users'));
 
         session()->flash('success', 'El curso se ha creado.');
-        return redirect('/admin/cursos/' . $course->id . '/edit');
+        return redirect()->route('admin.course.edit', $course->id);
     }
 
     public function edit($id)
@@ -65,6 +65,6 @@ class CoursesController extends Controller
         $course->delete();
 
         session()->flash('success', 'El curso ' . $course->name . ' se ha eliminado.');
-        return redirect('/admin/cursos');
+        return redirect()->route('admin.course.index');
     }
 }

@@ -4,11 +4,11 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>{{ $question->course->name }}</h1>
-        <a href="/preguntas/{{ $question->id }}" class="btn btn-default">Volver a la pregunta</a>
+        <a href="{{ route('question.show', $question->id) }}" class="btn btn-default">Volver a la pregunta</a>
     </div>
 
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="/cursos/{{ $question->course->id }}">Contenido</a></li>
+        <li role="presentation"><a href="{{ route('course.show', $question->course->id) }}">Contenido</a></li>
         <li role="presentation" class="active"><a href="#">Preguntas</a></li>
     </ul>
 
@@ -26,7 +26,7 @@
             </p>
         @endif
 
-        <form action="/preguntas/{{ $question->id }}" method="POST">
+        <form action="{{ route('question.update', $question->id) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <input type="hidden" name="course_id" value="{{ $question->course->id }}">

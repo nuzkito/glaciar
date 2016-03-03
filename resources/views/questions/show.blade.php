@@ -4,18 +4,18 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>{{ $question->course->name }}</h1>
-        <a href="/cursos/{{ $question->course->id }}/preguntas" class="btn btn-default">Volver a las preguntas</a>
+        <a href="{{ route('question.index', $question->course->id) }}" class="btn btn-default">Volver a las preguntas</a>
     </div>
 
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="/cursos/{{ $question->course->id }}">Contenido</a></li>
+        <li role="presentation"><a href="{{ route('course.index', $question->course->id) }}">Contenido</a></li>
         <li role="presentation" class="active"><a href="#">Preguntas</a></li>
     </ul>
 
     <div class="page-header col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
         <h1>{{ $question->title }}</h1>
         @can('edit-question', $question)
-            <a href="/preguntas/{{ $question->id }}/editar" class="btn btn-default">Editar pregunta</a>
+            <a href="{{ route('question.edit', [$question->id]) }}" class="btn btn-default">Editar pregunta</a>
         @endcan
     </div>
 
@@ -27,7 +27,7 @@
         <hr />
         <h3>Publicar una respuesta</h3>
 
-        <form action="/respuestas" method="POST">
+        <form action="{{ route('answer.store') }}" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="question_id" value="{{ $question->id }}">
             <div class="form-group">
@@ -57,8 +57,9 @@
                 </div>
                 <div class="panel-body">
                     @if (isset($answerToEdit) && $answerToEdit->id === $answer->id)
-                        <form action="/respuestas/{{ $answerToEdit->id }}" method="POST">
+                        <form action="{{ route('answer.update', $answerToEdit->id) }}" method="POST">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
                             <div class="form-group">
                                 <label for="title">Respuesta</label>
                                 <textarea class="form-control" id="body" name="body" placeholder="Responde a la pregunta">{{ old('body', $answerToEdit->body) }}</textarea>
@@ -74,7 +75,7 @@
                 <div class="panel-footer">
                     {{ $answer->created_at }}
                     @can('edit-answer', $answer)
-                        <a href="/respuestas/{{ $answer->id }}/editar">Editar</a>
+                        <a href="{{ route('answer.edit', $answer->id) }}">Editar</a>
                     @endcan
                 </div>
             </div>

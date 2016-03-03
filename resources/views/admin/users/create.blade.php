@@ -4,12 +4,12 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>Crear nuevo usuario</h1>
-        <a href="/admin/usuarios" class="btn btn-default">Volver a la lista de usuarios</a>
+        <a href="{{ route('admin.user.index') }}" class="btn btn-default">Volver a la lista de usuarios</a>
     </div>
 
     @include('partials.errors', ['text' => 'crear el usuario'])
 
-    <form action="/admin/usuarios" method="POST" class="form-horizontal">
+    <form action="{{ route('admin.user.store') }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <div class="form-group">

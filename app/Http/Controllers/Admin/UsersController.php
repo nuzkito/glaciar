@@ -36,7 +36,7 @@ class UsersController extends Controller
         $user->save();
 
         session()->flash('success', 'El usuario se ha creado.');
-        return redirect('/admin/usuarios/' . $user->id . '/edit');
+        return redirect()->route('admin.user.edit', $user->id);
     }
 
     public function edit($id)
@@ -71,6 +71,6 @@ class UsersController extends Controller
         $user->delete();
 
         session()->flash('success', 'El usuario ' . $user->name . ' se ha eliminado.');
-        return redirect('/admin/usuarios');
+        return redirect()->route('admin.user.index');
     }
 }
