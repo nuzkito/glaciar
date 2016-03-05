@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
 use App\Course;
 use App\User;
 
@@ -23,12 +24,8 @@ class CoursesController extends Controller
         return view('admin.courses.create', compact('users'));
     }
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         $course = new Course($request->only(['name']));
         $course->save();
         $course->users()->sync($request->input('users'));
@@ -44,12 +41,8 @@ class CoursesController extends Controller
         return view('admin.courses.edit', compact('course', 'users'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         $course = Course::findOrFail($id);
         $course->fill($request->only(['name']));
         $course->save();

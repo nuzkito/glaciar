@@ -6,19 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AnswerRequest;
 use App\Question;
 use App\Answer;
 
 class AnswersController extends Controller
 {
-    public function store(Request $request)
+    public function store(AnswerRequest $request)
     {
         $question = Question::findOrFail($request->input('question_id'));
         $this->authorize('view-course', $question->course);
-
-        $this->validate($request, [
-            'body' => 'required',
-        ]);
 
         $answer = new Answer($request->only(['body']));
         $answer->question()->associate($question);
@@ -40,14 +37,10 @@ class AnswersController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id)
+    public function update(AnswerRequest $request, int $id)
     {
         $answer = Answer::findOrFail($id);
         $this->authorize('edit-answer', $answer);
-
-        $this->validate($request, [
-            'body' => 'required',
-        ]);
 
         $answer->body = $request->get('body');
         $answer->save();

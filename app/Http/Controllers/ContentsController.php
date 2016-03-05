@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContentRequest;
 use App\Content;
 use App\Course;
 
@@ -27,15 +28,10 @@ class ContentsController extends Controller
         return view('contents.create', compact('course'));
     }
 
-    public function store(Request $request)
+    public function store(ContentRequest $request)
     {
         $course = Course::findOrFail($request->input('course_id'));
         $this->authorize('manage-course-contents', $course);
-
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
 
         $content = new Content($request->only(['title', 'body']));
         $content->course()->associate($course);
@@ -53,15 +49,10 @@ class ContentsController extends Controller
         return view('contents.edit', compact('content'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ContentRequest $request, $id)
     {
         $content = Content::findOrFail($id);
         $this->authorize('manage-course-contents', $content->course);
-
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
 
         $content->fill($request->only(['title', 'body']));
         $content->save();

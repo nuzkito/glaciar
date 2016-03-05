@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionRequest;
 use App\Course;
 use App\Question;
 
@@ -28,15 +29,10 @@ class QuestionsController extends Controller
         return view('questions.show', compact('question'));
     }
 
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
         $course = Course::findOrFail($request->input('course_id'));
         $this->authorize('view-course', $course);
-
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'body' => '',
-        ]);
 
         $question = new Question($request->only(['title', 'body']));
         $question->course()->associate($course);
@@ -55,16 +51,10 @@ class QuestionsController extends Controller
         return view('questions.edit', compact('question'));
     }
 
-    public function update(Request $request, $id)
+    public function update(QuestionRequest $request, $id)
     {
         $question = Question::findOrFail($id);
         $this->authorize('edit-question', $question);
-
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'body' => '',
-        ]);
-
         $question->fill($request->only(['title', 'body']))->save();
 
         session()->flash('success', 'La pregunta ha sido editada.');
