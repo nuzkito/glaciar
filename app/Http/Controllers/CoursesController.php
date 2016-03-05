@@ -19,10 +19,7 @@ class CoursesController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
-
-        if (auth()->user()->cannot('view-course', $course)) {
-            abort(403);
-        }
+        $this->authorize('view-course', $course);
 
         return view('courses.show', compact('course'));
     }

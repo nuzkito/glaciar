@@ -14,10 +14,7 @@ class ContentsController extends Controller
     public function show($id)
     {
         $content = Content::findOrFail($id);
-
-        if (auth()->user()->cannot('view-course', $content->course)) {
-            abort(403);
-        }
+        $this->authorize('view-course', $content->course);
 
         return view('contents.show', compact('content'));
     }
@@ -25,10 +22,7 @@ class ContentsController extends Controller
     public function create($course_id)
     {
         $course = Course::findOrFail($course_id);
-
-        if (auth()->user()->cannot('manage-course-contents', $course)) {
-            abort(403);
-        }
+        $this->authorize('manage-course-contents', $course);
 
         return view('contents.create', compact('course'));
     }
@@ -36,10 +30,7 @@ class ContentsController extends Controller
     public function store(Request $request)
     {
         $course = Course::findOrFail($request->input('course_id'));
-
-        if (auth()->user()->cannot('manage-course-contents', $course)) {
-            abort(403);
-        }
+        $this->authorize('manage-course-contents', $course);
 
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -57,10 +48,7 @@ class ContentsController extends Controller
     public function edit($id)
     {
         $content = Content::findOrFail($id);
-
-        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
-            abort(403);
-        }
+        $this->authorize('manage-course-contents', $content->course);
 
         return view('contents.edit', compact('content'));
     }
@@ -68,10 +56,7 @@ class ContentsController extends Controller
     public function update(Request $request, $id)
     {
         $content = Content::findOrFail($id);
-
-        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
-            abort(403);
-        }
+        $this->authorize('manage-course-contents', $content->course);
 
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -88,11 +73,7 @@ class ContentsController extends Controller
     public function destroy($id)
     {
         $content = Content::findOrFail($id);
-
-        if (auth()->user()->cannot('manage-course-contents', $content->course)) {
-            abort(403);
-        }
-
+        $this->authorize('manage-course-contents', $content->course);
         $content->delete();
 
         session()->flash('success', 'El contenido se ha editado.');

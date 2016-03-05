@@ -14,10 +14,7 @@ class AnswersController extends Controller
     public function store(Request $request)
     {
         $question = Question::findOrFail($request->input('question_id'));
-
-        if (auth()->user()->cannot('view-course', $question->course)) {
-            abort(403);
-        }
+        $this->authorize('view-course', $question->course);
 
         $this->validate($request, [
             'body' => 'required',
@@ -35,10 +32,7 @@ class AnswersController extends Controller
     public function edit(Request $request, int $id)
     {
         $answer = Answer::findOrFail($id);
-
-        if (auth()->user()->cannot('edit-answer', $answer)) {
-            abort(403);
-        }
+        $this->authorize('edit-answer', $answer);
 
         return view('questions.show', [
             'question' => $answer->question,
@@ -49,10 +43,7 @@ class AnswersController extends Controller
     public function update(Request $request, int $id)
     {
         $answer = Answer::findOrFail($id);
-
-        if (auth()->user()->cannot('edit-answer', $answer)) {
-            abort(403);
-        }
+        $this->authorize('edit-answer', $answer);
 
         $this->validate($request, [
             'body' => 'required',

@@ -14,11 +14,8 @@ class QuestionsController extends Controller
     public function index($courseId)
     {
         $course = Course::findOrFail($courseId);
+        $this->authorize('view-course', $course);
         $questions = $course->questions()->orderBy('created_at', 'desc')->paginate();
-
-        if (auth()->user()->cannot('view-course', $course)) {
-            abort(403);
-        }
 
         return view('questions.index', compact('course', 'questions'));
     }
@@ -26,10 +23,7 @@ class QuestionsController extends Controller
     public function show($id)
     {
         $question = Question::findOrFail($id);
-
-        if (auth()->user()->cannot('view-course', $question->course)) {
-            abort(403);
-        }
+        $this->authorize('view-course', $question->course);
 
         return view('questions.show', compact('question'));
     }
@@ -37,10 +31,7 @@ class QuestionsController extends Controller
     public function store(Request $request)
     {
         $course = Course::findOrFail($request->input('course_id'));
-
-        if (auth()->user()->cannot('view-course', $course)) {
-            abort(403);
-        }
+        $this->authorize('view-course', $course);
 
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -59,10 +50,7 @@ class QuestionsController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
-
-        if (auth()->user()->cannot('edit-question', $question)) {
-            return abort(403);
-        }
+        $this->authorize('edit-question', $question);
 
         return view('questions.edit', compact('question'));
     }
@@ -70,10 +58,7 @@ class QuestionsController extends Controller
     public function update(Request $request, $id)
     {
         $question = Question::findOrFail($id);
-
-        if (auth()->user()->cannot('edit-question', $question)) {
-            return abort(403);
-        }
+        $this->authorize('edit-question', $question);
 
         $this->validate($request, [
             'title' => 'required|max:255',
