@@ -12,7 +12,11 @@ class CoursesController extends Controller
 {
     public function index()
     {
-        $courses = auth()->user()->courses()->get();
+        if (auth()->user()->can('admin')) {
+            $courses = Course::all();
+        } else {
+            $courses = auth()->user()->courses()->get();
+        }
         return view('courses.index', compact('courses'));
     }
 

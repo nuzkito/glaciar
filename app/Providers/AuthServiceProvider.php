@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('view-course', function ($user, $course) {
-            return $user->courses->contains($course);
+            return $user->courses->contains($course) || $user->role === 'admin';
         });
 
         $gate->define('manage-course-contents', function ($user, $course) {
