@@ -17,7 +17,7 @@ class UpdateUserRequest extends Request
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $this->route('id'),
             'password' => '',
-            'role' => 'in:student,professor,admin',
+            'role' => 'in:student,teacher,admin',
         ];
     }
 }

@@ -38,7 +38,7 @@
             <div class="col-sm-10">
                 <select name="role" class="form-control">
                     <option value="student" @if (old('role') === 'student') selected @endif>Estudiante</option>
-                    <option value="professor" @if (old('role') === 'professor') selected @endif>Profesor</option>
+                    <option value="teacher" @if (old('role') === 'teacher') selected @endif>Profesor</option>
                     <option value="admin" @if (old('role') === 'admin') selected @endif>Administrador</option>
                 </select>
             </div>
