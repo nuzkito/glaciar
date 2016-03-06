@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="page-header">
         <h1>{{ $content->course->name }}</h1>
-        <a href="{{ route('content.index', $content->course->id) }}" class="btn btn-default">Volver a los contenidos</a>
+        <a href="{{ route('course.show', $content->course->id) }}" class="btn btn-default">Volver a los contenidos</a>
         <a href="{{ route('content.edit', $content->id) }}" class="btn btn-default">Editar</a>
         <form class="form-button" action="{{ route('content.destroy', $content->id) }}" method="post">
             {{ method_field('DELETE') }}
