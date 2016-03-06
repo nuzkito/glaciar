@@ -21,6 +21,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->defineAs(App\User::class, 'student', function (Faker\Generator $faker) use ($factory) {
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['role' => 'student']);
+});
+
+$factory->defineAs(App\User::class, 'teacher', function (Faker\Generator $faker) use ($factory) {
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['role' => 'teacher']);
+});
+
+$factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['role' => 'admin']);
+});
+
 $factory->define(App\Course::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->sentence,
