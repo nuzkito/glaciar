@@ -77,6 +77,15 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'content.destroy',
             'uses' => 'ContentsController@destroy',
         ]);
+
+        Route::get('/perfil', [
+            'as' => 'profile.edit',
+            'uses' => 'UserProfileController@edit',
+        ]);
+        Route::put('/perfil', [
+            'as' => 'profile.update',
+            'uses' => 'UserProfileController@update',
+        ]);
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {

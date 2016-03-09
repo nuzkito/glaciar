@@ -15,7 +15,7 @@ class UpdateUserRequest extends Request
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $this->route('id'),
+            'email' => 'required|email|max:255|unique:users,email,' . $this->input('id'),
             'password' => '',
             'role' => 'in:student,teacher,admin',
         ];
