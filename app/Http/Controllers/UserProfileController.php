@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\UpdateUserRequest;
+use App\User;
 
 class UserProfileController extends Controller
 {
@@ -18,6 +19,9 @@ class UserProfileController extends Controller
 
     public function update(UpdateUserRequest $request)
     {
+        $user = User::find($request->input('id'));
+        $this->authorize('edit-profile', $user);
+
         auth()->user()->fill($request->only(['name', 'email']));
 
         if ($request->has('password')) {

@@ -48,5 +48,9 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('edit-answer', function ($user, $answer) {
             return $user->id === $answer->user_id;
         });
+
+        $gate->define('edit-profile', function ($user, $userToEdit) {
+            return $user->id === $userToEdit->id;
+        });
     }
 }
