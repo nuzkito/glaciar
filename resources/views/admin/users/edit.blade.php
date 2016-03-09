@@ -19,6 +19,7 @@
     <form action="{{ route('admin.user.update', $user->id) }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
+        <input type="hidden" name="id" value="{{ $user->id }}">
 
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Nombre</label>

@@ -29,6 +29,7 @@
         <form action="{{ route('question.update', $question->id) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
+            <input type="hidden" name="id" value="{{ $question->id }}">
             <input type="hidden" name="course_id" value="{{ $question->course->id }}">
             <div class="form-group">
                 <label for="title">Título</label>

@@ -60,6 +60,7 @@
                         <form action="{{ route('answer.update', $answerToEdit->id) }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
+                            <input type="hidden" name="id" value="{{ $answerToEdit->id }}">
                             <div class="form-group">
                                 <label for="title">Respuesta</label>
                                 <textarea class="form-control" id="body" name="body" placeholder="Responde a la pregunta">{{ old('body', $answerToEdit->body) }}</textarea>

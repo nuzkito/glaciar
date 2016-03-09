@@ -23,6 +23,7 @@
         <form action="{{ route('content.update', $content->id) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
+            <input type="hidden" name="id" value="{{ $content->id }}">
             <input type="hidden" name="course_id" value="{{ $content->course->id }}">
             <div class="form-group">
                 <label for="title">Título</label>
