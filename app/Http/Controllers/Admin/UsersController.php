@@ -26,8 +26,7 @@ class UsersController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $user = new User($request->only(['name', 'email', 'role']));
-        $user->password = bcrypt($request->input('password'));
+        $user = new User($request->only(['name', 'email', 'role', 'password']));
         $user->save();
 
         session()->flash('success', 'El usuario se ha creado.');
@@ -43,10 +42,7 @@ class UsersController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
-        $user->fill($request->only(['name', 'email', 'role']));
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
+        $user->fill($request->only(['name', 'email', 'role', 'password']));
         $user->save();
 
         session()->flash('success', 'Los datos del usuario se han actualizado.');

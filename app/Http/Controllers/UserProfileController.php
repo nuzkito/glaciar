@@ -22,12 +22,7 @@ class UserProfileController extends Controller
         $user = User::find($request->input('id'));
         $this->authorize('edit-profile', $user);
 
-        auth()->user()->fill($request->only(['name', 'email']));
-
-        if ($request->has('password')) {
-            auth()->user()->password = bcrypt($request->input('password'));
-        }
-
+        auth()->user()->fill($request->only(['name', 'email', 'password']));
         auth()->user()->save();
 
         session()->flash('success', 'Se han modificado los datos de tu perfil.');
