@@ -29,6 +29,7 @@ class CoursesController extends Controller
         $course = new Course($request->only(['name']));
         $course->save();
         $course->users()->sync($request->input('users'));
+        $course->teachers()->sync($request->input('teachers'));
 
         session()->flash('success', 'El curso se ha creado.');
         return redirect()->route('admin.course.edit', $course->id);
@@ -47,6 +48,7 @@ class CoursesController extends Controller
         $course->fill($request->only(['name']));
         $course->save();
         $course->users()->sync($request->input('users'));
+        $course->teachers()->sync($request->input('teachers'));
 
         session()->flash('success', 'Los datos del curso se han actualizado.');
         return redirect()->back();
