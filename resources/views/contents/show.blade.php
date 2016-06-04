@@ -5,12 +5,14 @@
     <div class="page-header">
         <h1>{{ $content->course->name }}</h1>
         <a href="{{ route('course.show', $content->course->id) }}" class="btn btn-default">Volver a los contenidos</a>
-        <a href="{{ route('content.edit', $content->id) }}" class="btn btn-default">Editar</a>
-        <form class="form-button" action="{{ route('content.destroy', $content->id) }}" method="post">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-        </form>
+        @can('manage-course-contents', $content->course)
+            <a href="{{ route('content.edit', $content->id) }}" class="btn btn-default">Editar</a>
+            <form class="form-button" action="{{ route('content.destroy', $content->id) }}" method="post">
+                {{ method_field('DELETE') }}
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        @endcan
     </div>
 
     <ul class="nav nav-tabs">
