@@ -8,7 +8,7 @@ class QuestionTest extends TestCase
 {
     public function test_student_can_create_a_question()
     {
-        $user = factory(App\User::class, 'student')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
         $course->users()->sync([$user->id]);
 
@@ -24,7 +24,7 @@ class QuestionTest extends TestCase
 
     public function test_student_can_see_questions()
     {
-        $user = factory(App\User::class, 'student')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
         $course->users()->sync([$user->id]);
         $question = factory(App\Question::class)->make();

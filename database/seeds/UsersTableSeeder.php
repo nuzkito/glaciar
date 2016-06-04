@@ -16,12 +16,12 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@example',
         ]);
 
-        factory(App\User::class, 'teacher')->create([
+        factory(App\User::class)->create([
             'name' => 'Teacher',
             'email' => 'teacher@example',
         ]);
 
-        factory(App\User::class, 'student')->create([
+        factory(App\User::class)->create([
             'name' => 'Student',
             'email' => 'student@example',
         ]);

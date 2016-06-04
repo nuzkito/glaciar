@@ -8,7 +8,7 @@ class AnswerTest extends TestCase
 {
     public function test_student_can_create_answers()
     {
-        $user = factory(App\User::class, 'student')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
         $course->users()->sync([$user->id]);
         $question = factory(App\Question::class)->make();

@@ -4,7 +4,7 @@ class ContentTest extends TestCase
 {
     public function test_student_cannot_create_contents()
     {
-        $user = factory(App\User::class, 'student')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
         $course->users()->sync([$user->id]);
 
@@ -15,9 +15,9 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_create_contents()
     {
-        $user = factory(App\User::class, 'teacher')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
-        $course->users()->sync([$user->id]);
+        $course->teachers()->sync([$user->id]);
 
         $this->actingAs($user)
             ->visit(route('content.create', $course->id))
@@ -31,9 +31,9 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_edit_contents()
     {
-        $user = factory(App\User::class, 'teacher')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
-        $course->users()->sync([$user->id]);
+        $course->teachers()->sync([$user->id]);
         $content = factory(App\Content::class)->make();
         $course->contents()->save($content);
 
@@ -50,7 +50,7 @@ class ContentTest extends TestCase
 
     public function test_student_can_see_contents()
     {
-        $user = factory(App\User::class, 'student')->create();
+        $user = factory(App\User::class)->create();
         $course = factory(App\Course::class)->create();
         $course->users()->sync([$user->id]);
         $content = factory(App\Content::class)->make();

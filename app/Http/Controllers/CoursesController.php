@@ -16,6 +16,8 @@ class CoursesController extends Controller
             $courses = Course::all();
         } else {
             $courses = auth()->user()->courses()->get();
+            $coursesThatTeach = auth()->user()->coursesThatTeach()->get();
+            $courses = $courses->merge($coursesThatTeach);
         }
         return view('courses.index', compact('courses'));
     }

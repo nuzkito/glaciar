@@ -31,14 +31,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('view-course', function ($user, $course) {
-            return $user->courses->contains($course) || $user->role === 'admin';
+            return $user->courses->contains($course)
+                || $course->teachers->contains($user)
+                || $user->role === 'admin';
         });
 
         $gate->define('manage-course-contents', function ($user, $course) {
-            return $user->role === 'admin' || (
-                $user->role === 'teacher'
-                && $user->courses->contains($course)
-            );
+            return $user->role === 'admin' || $course->teachers->contains($user);
         });
 
         $gate->define('edit-question', function ($user, $question) {

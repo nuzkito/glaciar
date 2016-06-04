@@ -16,21 +16,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->email,
         'password' => 'secret',
-        'role' => $faker->randomElement(['teacher', 'student']),
+        'role' => 'user',
         'remember_token' => str_random(10),
     ];
-});
-
-$factory->defineAs(App\User::class, 'student', function (Faker\Generator $faker) use ($factory) {
-    $user = $factory->raw(App\User::class);
-
-    return array_merge($user, ['role' => 'student']);
-});
-
-$factory->defineAs(App\User::class, 'teacher', function (Faker\Generator $faker) use ($factory) {
-    $user = $factory->raw(App\User::class);
-
-    return array_merge($user, ['role' => 'teacher']);
 });
 
 $factory->defineAs(App\User::class, 'admin', function (Faker\Generator $faker) use ($factory) {
