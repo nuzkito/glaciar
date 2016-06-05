@@ -1,3 +1,11 @@
 .form-button {
     display: inline-block;
 }
+
+.form-link {
+    display: inline;
+}
+
+.form-link .btn-link {
+    padding: 0;
+}

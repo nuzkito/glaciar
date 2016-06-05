@@ -39,6 +39,14 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'question.update',
             'uses' => 'QuestionsController@update',
         ]);
+        Route::post('/preguntas/{id}/votar', [
+            'as' => 'question.vote',
+            'uses' => 'QuestionVotesController@store',
+        ]);
+        Route::delete('/preguntas/{id}/eliminar-voto', [
+            'as' => 'question.unvote',
+            'uses' => 'QuestionVotesController@destroy',
+        ]);
 
         Route::post('/respuestas', [
             'as' => 'answer.store',

@@ -47,7 +47,20 @@
             <div class="panel-footer">
                 {{ $question->created_at }} |
                 {{ $question->user->name }} |
-                {{ $question->answers->count() }} respuestas
+                {{ $question->answers->count() }} respuestas |
+                {{ $question->votes_count }} voto{{ $question->votes_count === 1 ? '' : 's' }} |
+                @if ($question->votes->contains(auth()->user()))
+                    <form class="form-link" action="{{ route('question.unvote', $question->id) }}" method="post">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button class="btn-link">Eliminar voto</button>
+                    </form>
+                @else
+                    <form class="form-link" action="{{ route('question.vote', $question->id) }}" method="post">
+                        {{ csrf_field() }}
+                        <button class="btn-link">Votar</button>
+                    </form>
+                @endif
             </div>
         </div>
     @endforeach

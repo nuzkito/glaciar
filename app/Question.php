@@ -29,4 +29,10 @@ class Question extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'question_votes', 'question_id', 'user_id')
+            ->withTimestamps();
+    }
 }

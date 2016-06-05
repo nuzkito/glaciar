@@ -16,7 +16,7 @@ class QuestionsController extends Controller
     {
         $course = Course::findOrFail($courseId);
         $this->authorize('view-course', $course);
-        $questions = $course->questions()->orderBy('created_at', 'desc')->paginate();
+        $questions = $course->questions()->withCount('votes')->orderBy('created_at', 'desc')->paginate();
 
         return view('questions.index', compact('course', 'questions'));
     }
