@@ -74,7 +74,20 @@
                     @endif
                 </div>
                 <div class="panel-footer">
-                    {{ $answer->created_at }}
+                    {{ $answer->created_at->diffForHumans() }} |
+                    {{ $answer->votes->count() }} voto{{$answer->votes->count() === 1 ? '' : 's' }} |
+                    @if ($answer->votes->contains(auth()->user()))
+                        <form class="form-link" action="{{ route('answer.unvote', $answer->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button class="btn-link">Eliminar voto</button>
+                        </form>
+                    @else
+                        <form class="form-link" action="{{ route('answer.vote', $answer->id) }}" method="post">
+                            {{ csrf_field() }}
+                            <button class="btn-link">Votar</button>
+                        </form>
+                    @endif
                     @can('edit-answer', $answer)
                         <a href="{{ route('answer.edit', $answer->id) }}">Editar</a>
                     @endcan

@@ -60,6 +60,14 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'answer.update',
             'uses' => 'AnswersController@update',
         ]);
+        Route::post('/respuestas/{id}/votar', [
+            'as' => 'answer.vote',
+            'uses' => 'AnswerVotesController@store',
+        ]);
+        Route::delete('/respuestas/{id}/eliminar-voto', [
+            'as' => 'answer.unvote',
+            'uses' => 'AnswerVotesController@destroy',
+        ]);
 
         Route::get('/cursos/{id}/crear-contenido', [
             'as' => 'content.create',
