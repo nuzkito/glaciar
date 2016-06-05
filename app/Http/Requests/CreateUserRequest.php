@@ -17,7 +17,7 @@ class CreateUserRequest extends Request
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required',
-            'role' => 'in:student,teacher,admin',
+            'role' => 'in:user,admin',
         ];
     }
 }
