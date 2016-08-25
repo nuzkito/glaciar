@@ -3,6 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
+    Route::get('/logout', 'Auth\LoginController@logout');
 
     Route::get('/', [
         'as' => 'index',
