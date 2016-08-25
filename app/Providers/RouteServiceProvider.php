@@ -35,8 +35,50 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::group(['namespace' => $this->namespace], function ($router) {
-            require app_path('Http/routes.php');
+        $this->mapPublicRoutes();
+        $this->mapAuthRoutes();
+        $this->mapAppRoutes();
+        $this->mapAdminRoutes();
+    }
+
+    protected function mapPublicRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/public.php');
+        });
+    }
+
+    protected function mapAppRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'auth'],
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/app.php');
+        });
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'auth', 'admin'],
+            'namespace' => $this->namespace . '\Admin',
+        ], function ($router) {
+            require base_path('routes/admin.php');
+        });
+    }
+
+    protected function mapAuthRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            Route::auth();
+            Route::get('/logout', 'Auth\LoginController@logout');
         });
     }
 }
