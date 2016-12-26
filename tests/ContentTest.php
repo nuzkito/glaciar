@@ -15,7 +15,7 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_create_contents()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(App\User::class, 'teacher')->create();
         $course = factory(App\Course::class)->create();
         $course->teachers()->sync([$user->id]);
 
@@ -31,7 +31,7 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_edit_contents()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(App\User::class, 'teacher')->create();
         $course = factory(App\Course::class)->create();
         $course->teachers()->sync([$user->id]);
         $content = factory(App\Content::class)->make();

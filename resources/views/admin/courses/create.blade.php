@@ -34,8 +34,8 @@
             <label for="name" class="col-sm-2 control-label">Profesores del curso</label>
             <div class="col-sm-10">
                 <select class="form-control" name="teachers[]" multiple size="15">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
+                    @foreach ($teachers as $teacher)
+                        <option value="{{ $teacher->id }}">{{ $teacher->name }} - {{ $teacher->email }}</option>
                     @endforeach
                 </select>
             </div>

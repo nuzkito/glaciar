@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 
 class CourseRequest extends Request
 {
@@ -15,6 +16,11 @@ class CourseRequest extends Request
     {
         return [
             'name' => 'required|max:255',
+            'teachers' => [
+                Rule::exists('users')->where(function ($query) {
+                    return $query->whereIn('role', ['admin', 'teacher']);
+                }),
+            ],
         ];
     }
 }

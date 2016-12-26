@@ -14,8 +14,8 @@ class CoursesTableSeeder extends Seeder
         $users = App\User::all();
 
         factory(App\Course::class, 10)->create()->each(function ($course) use ($users) {
+            $course->teachers()->attach($users->where('role', 'teacher')->random());
             $course->users()->sync($users->random(mt_rand(2, $users->count())));
-            $course->teachers()->sync($users->random(3));
         });
     }
 }
