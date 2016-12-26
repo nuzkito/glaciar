@@ -17,7 +17,7 @@ class CourseRequest extends Request
         return [
             'name' => 'required|max:255',
             'teachers' => [
-                Rule::exists('users')->where(function ($query) {
+                Rule::exists('users', 'id')->where(function ($query) {
                     return $query->whereIn('role', ['admin', 'teacher']);
                 }),
             ],
