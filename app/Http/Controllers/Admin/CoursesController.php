@@ -21,7 +21,9 @@ class CoursesController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('admin.courses.create', compact('users'));
+        $teachers = $users->whereIn('role', ['admin', 'teacher']);
+
+        return view('admin.courses.create', compact('users', 'teachers'));
     }
 
     public function store(CourseRequest $request)
@@ -39,7 +41,9 @@ class CoursesController extends Controller
     {
         $course = Course::findOrFail($id);
         $users = User::all();
-        return view('admin.courses.edit', compact('course', 'users'));
+        $teachers = $users->whereIn('role', ['admin', 'teacher']);
+
+        return view('admin.courses.edit', compact('course', 'users', 'teachers'));
     }
 
     public function update(CourseRequest $request, $id)

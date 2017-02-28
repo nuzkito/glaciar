@@ -17,9 +17,9 @@ class CoursesController extends Controller
         } else {
             $courses = auth()->user()->courses()->get();
         }
-        $coursesThatTeach = auth()->user()->coursesThatTeach()->get();
+        $coursesAsTeacher = auth()->user()->coursesAsTeacher()->get();
 
-        return view('courses.index', compact('courses', 'coursesThatTeach'));
+        return view('courses.index', compact('courses', 'coursesAsTeacher'));
     }
 
     public function show($id)

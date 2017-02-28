@@ -47,6 +47,7 @@
             <div class="col-sm-10">
                 <select name="role" class="form-control">
                     <option value="user" @if ((old('role') ?? $user->role) === 'user') selected @endif>Usuario</option>
+                    <option value="teacher" @if ((old('role') ?? $user->role) === 'teacher') selected @endif>Profesor</option>
                     <option value="admin" @if ((old('role') ?? $user->role) === 'admin') selected @endif>Administrador</option>
                 </select>
             </div>

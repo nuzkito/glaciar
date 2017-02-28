@@ -21,7 +21,7 @@ class ContentTest extends BrowserKitTestCase
 
     public function test_teacher_can_create_contents()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class, 'teacher')->create();
         $course = factory(Course::class)->create();
         $course->teachers()->sync([$user->id]);
 
@@ -37,7 +37,7 @@ class ContentTest extends BrowserKitTestCase
 
     public function test_teacher_can_edit_contents()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class, 'teacher')->create();
         $course = factory(Course::class)->create();
         $course->teachers()->sync([$user->id]);
         $content = factory(Content::class)->make();
