@@ -43,6 +43,9 @@ $factory->define(App\Content::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraphs(mt_rand(1, 5), true),
+        'course_id' => function () {
+            return factory(App\Course::class)->create()->id;
+        },
     ];
 });
 
@@ -50,11 +53,23 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraphs(mt_rand(1, 3), true),
+        'course_id' => function () {
+            return factory(App\Course::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
     ];
 });
 
 $factory->define(App\Answer::class, function (Faker\Generator $faker) {
     return [
         'body' => $faker->paragraphs(mt_rand(1, 3), true),
+        'question_id' => function () {
+            return factory(App\Question::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
     ];
 });

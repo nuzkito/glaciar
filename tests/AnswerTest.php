@@ -11,11 +11,8 @@ class AnswerTest extends BrowserKitTestCase
     public function test_student_can_create_answers()
     {
         $user = factory(User::class)->create();
-        $course = factory(Course::class)->create();
-        $course->users()->sync([$user->id]);
-        $question = factory(Question::class)->make();
-        $question->user_id = factory(User::class)->create()->id;
-        $course->questions()->save($question);
+        $question = factory(Question::class)->create();
+        $question->course->users()->sync([$user->id]);
 
         $this->actingAs($user)
             ->visit(route('question.show', $question->id))

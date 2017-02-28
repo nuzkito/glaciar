@@ -12,15 +12,9 @@ class AnswerVotesTest extends BrowserKitTestCase
     protected function createData()
     {
         $user = factory(User::class)->create();
-        $course = factory(Course::class)->create();
-        $course->users()->sync([$user->id]);
-        $question = factory(Question::class)->make();
-        $question->user_id = factory(User::class)->create()->id;
-        $course->questions()->save($question);
-        $answer = factory(Answer::class)->make();
-        $answer->user_id = factory(User::class)->create()->id;
-        $answer->question_id = $question->id;
-        $answer->save();
+        $answer = factory(Answer::class)->create();
+        $question = $answer->question;
+        $question->course->users()->sync([$user->id]);
 
         return compact('user', 'course', 'question', 'answer');
     }

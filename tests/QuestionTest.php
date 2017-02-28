@@ -27,14 +27,11 @@ class QuestionTest extends BrowserKitTestCase
     public function test_student_can_see_questions()
     {
         $user = factory(User::class)->create();
-        $course = factory(Course::class)->create();
-        $course->users()->sync([$user->id]);
-        $question = factory(Question::class)->make();
-        $question->user_id = factory(User::class)->create()->id;
-        $course->questions()->save($question);
+        $question = factory(Question::class)->create();
+        $question->course->users()->sync([$user->id]);
 
         $this->actingAs($user)
-            ->visit(route('question.index', $course->id))
+            ->visit(route('question.index', $question->course->id))
             ->click($question->title)
             ->seePageIs(route('question.show', $question->id))
             ->see($question->title)

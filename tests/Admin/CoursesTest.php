@@ -13,8 +13,6 @@ class CoursesTest extends BrowserKitTestCase
     {
         $user = factory(User::class, 'admin')->create();
         $course = factory(Course::class)->create();
-        $content = factory(Content::class)->make();
-        $course->contents()->save($content);
 
         $this->actingAs($user)
             ->visit(route('admin.course.index'))

@@ -38,10 +38,8 @@ class ContentTest extends BrowserKitTestCase
     public function test_teacher_can_edit_contents()
     {
         $user = factory(User::class, 'teacher')->create();
-        $course = factory(Course::class)->create();
-        $course->teachers()->sync([$user->id]);
-        $content = factory(Content::class)->make();
-        $course->contents()->save($content);
+        $content = factory(Content::class)->create();
+        $content->course->teachers()->sync([$user->id]);
 
         $this->actingAs($user)
             ->visit(route('content.edit', $content->id))
@@ -57,10 +55,8 @@ class ContentTest extends BrowserKitTestCase
     public function test_student_can_see_contents()
     {
         $user = factory(User::class)->create();
-        $course = factory(Course::class)->create();
-        $course->users()->sync([$user->id]);
-        $content = factory(Content::class)->make();
-        $course->contents()->save($content);
+        $content = factory(Content::class)->create();
+        $content->course->teachers()->sync([$user->id]);
 
         $this->actingAs($user)
             ->visit(route('content.show', $content->id))
