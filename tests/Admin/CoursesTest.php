@@ -1,12 +1,19 @@
 <?php
 
-class CoursesTest extends TestCase
+namespace Tests\Admin;
+
+use Tests\BrowserKitTestCase;
+use App\User;
+use App\Course;
+use App\Content;
+
+class CoursesTest extends BrowserKitTestCase
 {
     public function test_courses_can_be_deleted()
     {
-        $user = factory(App\User::class, 'admin')->create();
-        $course = factory(App\Course::class)->create();
-        $content = factory(App\Content::class)->make();
+        $user = factory(User::class, 'admin')->create();
+        $course = factory(Course::class)->create();
+        $content = factory(Content::class)->make();
         $course->contents()->save($content);
 
         $this->actingAs($user)

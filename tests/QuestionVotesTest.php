@@ -1,14 +1,20 @@
 <?php
 
-class QuestionVotesTest extends TestCase
+namespace Tests;
+
+use App\User;
+use App\Course;
+use App\Question;
+
+class QuestionVotesTest extends BrowserKitTestCase
 {
     protected function createData()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->users()->sync([$user->id]);
-        $question = factory(App\Question::class)->make();
-        $question->user_id = factory(App\User::class)->create()->id;
+        $question = factory(Question::class)->make();
+        $question->user_id = factory(User::class)->create()->id;
         $course->questions()->save($question);
 
         return compact('user', 'course', 'question');

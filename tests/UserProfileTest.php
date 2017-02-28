@@ -1,10 +1,14 @@
 <?php
 
-class UserProfileTest extends TestCase
+namespace Tests;
+
+use App\User;
+
+class UserProfileTest extends BrowserKitTestCase
 {
     public function test_user_can_edit_profile()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->actingAs($user)
             ->visit('/')
@@ -22,7 +26,7 @@ class UserProfileTest extends TestCase
 
     public function test_user_can_change_password()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->actingAs($user)
             ->visit(route('profile.edit'))

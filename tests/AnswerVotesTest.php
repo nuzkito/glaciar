@@ -1,21 +1,24 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests;
 
-class AnswerVotesTest extends TestCase
+use App\User;
+use App\Course;
+use App\Answer;
+use App\Question;
+
+class AnswerVotesTest extends BrowserKitTestCase
 {
     protected function createData()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->users()->sync([$user->id]);
-        $question = factory(App\Question::class)->make();
-        $question->user_id = factory(App\User::class)->create()->id;
+        $question = factory(Question::class)->make();
+        $question->user_id = factory(User::class)->create()->id;
         $course->questions()->save($question);
-        $answer = factory(App\Answer::class)->make();
-        $answer->user_id = factory(App\User::class)->create()->id;
+        $answer = factory(Answer::class)->make();
+        $answer->user_id = factory(User::class)->create()->id;
         $answer->question_id = $question->id;
         $answer->save();
 

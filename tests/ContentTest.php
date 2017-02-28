@@ -1,11 +1,17 @@
 <?php
 
-class ContentTest extends TestCase
+namespace Tests;
+
+use App\User;
+use App\Course;
+use App\Content;
+
+class ContentTest extends BrowserKitTestCase
 {
     public function test_student_cannot_create_contents()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->users()->sync([$user->id]);
 
         $this->actingAs($user)
@@ -15,8 +21,8 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_create_contents()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->teachers()->sync([$user->id]);
 
         $this->actingAs($user)
@@ -31,10 +37,10 @@ class ContentTest extends TestCase
 
     public function test_teacher_can_edit_contents()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->teachers()->sync([$user->id]);
-        $content = factory(App\Content::class)->make();
+        $content = factory(Content::class)->make();
         $course->contents()->save($content);
 
         $this->actingAs($user)
@@ -50,10 +56,10 @@ class ContentTest extends TestCase
 
     public function test_student_can_see_contents()
     {
-        $user = factory(App\User::class)->create();
-        $course = factory(App\Course::class)->create();
+        $user = factory(User::class)->create();
+        $course = factory(Course::class)->create();
         $course->users()->sync([$user->id]);
-        $content = factory(App\Content::class)->make();
+        $content = factory(Content::class)->make();
         $course->contents()->save($content);
 
         $this->actingAs($user)
