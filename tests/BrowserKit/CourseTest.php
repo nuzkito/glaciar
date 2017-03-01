@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Tests\BrowserKit;
 
+use Tests\BrowserKitTestCase;
 use App\User;
 use App\Course;
 

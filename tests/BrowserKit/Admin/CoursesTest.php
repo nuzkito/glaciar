@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin;
+namespace Tests\BrowserKit\Admin;
 
 use Tests\BrowserKitTestCase;
 use App\User;
