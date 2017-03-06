@@ -60,6 +60,16 @@
                     </form>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Iniciar sesión con un usuario aleatorio</div>
+                <div class="panel-body">
+                    <form action="{{ route('login-with-random-user') }}" method="post">
+                        {{ csrf_field() }}
+                        <button type="submit" name="button">Iniciar sesión</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

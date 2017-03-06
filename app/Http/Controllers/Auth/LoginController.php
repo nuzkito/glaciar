@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -47,5 +48,18 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('login');
+    }
+
+    public function loginWithRandomUser()
+    {
+        if (config('app.env') === 'production') {
+            return response(null, 404);
+        }
+
+        $user = User::where('role', '!=', 'admin')->inRandomOrder()->first();
+
+        auth()->login($user);
+
+        return redirect($this->redirectTo);
     }
 }
