@@ -78,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace,
         ], function ($router) {
             Route::auth();
-            Route::get('/logout', 'Auth\LoginController@logout');
+            Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
         });
     }
 }

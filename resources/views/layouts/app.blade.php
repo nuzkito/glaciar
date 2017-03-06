@@ -70,7 +70,10 @@
                             <li><a href="{{ route('admin.user.index') }}">Administrar Usuarios</a></li>
                         @endcan
                         <li><a href="{{ route('profile.edit') }}">Perfil</a></li>
-                        <li><a href="/logout">Cerrar sesión</a></li>
+                        <li><form action="{{ route('logout') }}" method="post">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-link navbar-btn">Cerrar sesión</button>
+                        </form></li>
                     @endif
                 </ul>
             </div>
