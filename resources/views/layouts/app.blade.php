@@ -64,20 +64,13 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     @else
+                        <li><p class="navbar-text">¡Hola {{ Auth::user()->name }}!</p></li>
                         @can('admin')
                             <li><a href="{{ route('admin.course.index') }}">Administrar Cursos</a></li>
                             <li><a href="{{ route('admin.user.index') }}">Administrar Usuarios</a></li>
                         @endcan
                         <li><a href="{{ route('profile.edit') }}">Perfil</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="/logout">Cerrar sesión</a></li>
                     @endif
                 </ul>
             </div>
